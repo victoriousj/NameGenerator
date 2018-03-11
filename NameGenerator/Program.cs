@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CSharp;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -26,17 +27,20 @@ namespace NameGenerator
 			List<string> lastNameList = lastNamesString.Split(' ').OrderBy(c => c).ToList();
 			int lastNameCount = lastNameList.Count();
 
+			Console.WriteLine(@"List<Customer> customers = new List<Customer>()");
+			Console.WriteLine("{");
 			for (int i = 0; i < 10000; i++)
 			{
 				string randomFirstName = firstNameList[random.Next(firstNameCount)];
 				string randomLastName = lastNameList[random.Next(lastNameCount)];
 
-				string Person = $"{randomFirstName} {randomLastName}";
+				//string Person = $"{randomFirstName} {randomLastName}";
 
-				//string Person = $"new Customer() {{ FirstName = {randomFirstName}, LastName = {randomLastName} }},";
+				string Person = $"	new Customer() {{ FirstName = \"{randomFirstName}\", LastName = \"{randomLastName}\" }},";
 
 				Console.WriteLine(Person);
 			}
+			Console.WriteLine("};");
 			Console.ReadLine();
 		}
 	}
